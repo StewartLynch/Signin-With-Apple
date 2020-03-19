@@ -27,6 +27,9 @@
 		BB53B0302422E29100FDE6AA /* FBKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B02F2422E29100FDE6AA /* FBKeys.swift */; };
 		BB53B0322422E2C800FDE6AA /* DocumentSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B0312422E2C800FDE6AA /* DocumentSerializable.swift */; };
 		BB53B0342422EB8500FDE6AA /* SignInWithAppleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B0332422EB8500FDE6AA /* SignInWithAppleView.swift */; };
+		BBD8C2F62423F78900F713AC /* SignInWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD8C2F52423F78900F713AC /* SignInWithEmailView.swift */; };
+		BBD8C2F82423F92400F713AC /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD8C2F72423F92400F713AC /* ForgotPasswordView.swift */; };
+		BBD8C2FA2423F9A000F713AC /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD8C2F92423F9A000F713AC /* SignUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +57,9 @@
 		BB53B02F2422E29100FDE6AA /* FBKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBKeys.swift; sourceTree = "<group>"; };
 		BB53B0312422E2C800FDE6AA /* DocumentSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentSerializable.swift; sourceTree = "<group>"; };
 		BB53B0332422EB8500FDE6AA /* SignInWithAppleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleView.swift; sourceTree = "<group>"; };
+		BBD8C2F52423F78900F713AC /* SignInWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithEmailView.swift; sourceTree = "<group>"; };
+		BBD8C2F72423F92400F713AC /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		BBD8C2F92423F9A000F713AC /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		CDAB059005AAF4AFA08F7C1A /* Pods-Signin With Apple.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signin With Apple.release.xcconfig"; path = "Target Support Files/Pods-Signin With Apple/Pods-Signin With Apple.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,20 +120,20 @@
 				BB53B00C2422CDC300FDE6AA /* SceneDelegate.swift */,
 				BB53B0252422D81100FDE6AA /* AppVM.swift */,
 				BB53B0272422D86800FDE6AA /* UserViewModel.swift */,
+				BBD8C2F72423F92400F713AC /* ForgotPasswordView.swift */,
 				BB53B0312422E2C800FDE6AA /* DocumentSerializable.swift */,
-				BB53B02D2422E21500FDE6AA /* FBUser.swift */,
-				BB0B48E624233CB70057B18C /* FBAuth.swift */,
-				BB0B48E824233D410057B18C /* FBError.swift */,
-				BB53B02F2422E29100FDE6AA /* FBKeys.swift */,
+				BB0B48EA24233E620057B18C /* FBFireStore.swift */,
+				BBD8C2F42423F51D00F713AC /* Authentication */,
 				BB53B00E2422CDC300FDE6AA /* ContentView.swift */,
 				BB53B0292422DA6600FDE6AA /* LoginView.swift */,
 				BB53B0332422EB8500FDE6AA /* SignInWithAppleView.swift */,
+				BBD8C2F52423F78900F713AC /* SignInWithEmailView.swift */,
+				BBD8C2F92423F9A000F713AC /* SignUpView.swift */,
 				BB53B0102422CDC400FDE6AA /* Assets.xcassets */,
 				BB53B0152422CDC400FDE6AA /* LaunchScreen.storyboard */,
 				BB53B0182422CDC400FDE6AA /* Info.plist */,
 				BB53B01E2422CF7300FDE6AA /* GoogleService-Info.plist */,
 				BB53B0122422CDC400FDE6AA /* Preview Content */,
-				BB0B48EA24233E620057B18C /* FBFireStore.swift */,
 			);
 			path = "Signin With Apple";
 			sourceTree = "<group>";
@@ -138,6 +144,17 @@
 				BB53B0132422CDC400FDE6AA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BBD8C2F42423F51D00F713AC /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				BB53B02D2422E21500FDE6AA /* FBUser.swift */,
+				BB0B48E624233CB70057B18C /* FBAuth.swift */,
+				BB0B48E824233D410057B18C /* FBError.swift */,
+				BB53B02F2422E29100FDE6AA /* FBKeys.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +276,7 @@
 				BB53B0302422E29100FDE6AA /* FBKeys.swift in Sources */,
 				BB53B0242422D51E00FDE6AA /* MyTabsView.swift in Sources */,
 				BB53B00B2422CDC300FDE6AA /* AppDelegate.swift in Sources */,
+				BBD8C2F82423F92400F713AC /* ForgotPasswordView.swift in Sources */,
 				BB0B48EB24233E620057B18C /* FBFireStore.swift in Sources */,
 				BB0B48E724233CB70057B18C /* FBAuth.swift in Sources */,
 				BB0B48E924233D410057B18C /* FBError.swift in Sources */,
@@ -267,9 +285,11 @@
 				BB53B0342422EB8500FDE6AA /* SignInWithAppleView.swift in Sources */,
 				BB53B0262422D81100FDE6AA /* AppVM.swift in Sources */,
 				BB53B0322422E2C800FDE6AA /* DocumentSerializable.swift in Sources */,
+				BBD8C2F62423F78900F713AC /* SignInWithEmailView.swift in Sources */,
 				BB53B02E2422E21500FDE6AA /* FBUser.swift in Sources */,
 				BB53B0282422D86800FDE6AA /* UserViewModel.swift in Sources */,
 				BB53B02A2422DA6600FDE6AA /* LoginView.swift in Sources */,
+				BBD8C2FA2423F9A000F713AC /* SignUpView.swift in Sources */,
 				BB53B00F2422CDC300FDE6AA /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
