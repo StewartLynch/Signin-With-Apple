@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        let contentView = MyTabsView().environmentObject(userSettings)
+        let contentView = ContentView().environmentObject(userSettings)
         
 
         // Use a UIHostingController as window root view controller.

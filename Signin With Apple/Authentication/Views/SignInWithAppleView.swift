@@ -97,7 +97,6 @@ struct SignInWithAppleView: UIViewRepresentable {
 
                             case .failure(let err):
                                 print(err.localizedDescription)
-
                             }
                         }
                     case .failure(let err):
@@ -105,9 +104,8 @@ struct SignInWithAppleView: UIViewRepresentable {
 
                     }
                 }
-                
             } else {
-
+                print("Could not get credentials")
             }
         }
         

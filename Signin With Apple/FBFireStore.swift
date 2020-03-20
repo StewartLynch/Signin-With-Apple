@@ -8,7 +8,7 @@
 import FirebaseFirestore
 
 struct FBFirestore {
-    
+
     static func retrieveFBUser(uid: String, completion: @escaping (Result<FBUser, Error>) -> ()) {
         let reference = Firestore
             .firestore()

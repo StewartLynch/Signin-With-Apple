@@ -47,7 +47,7 @@ struct SignUpView: View {
                 VStack(spacing: 20 ) {
                     Button(action: {
                         // Signup
-                        FBAuth.createUser(withEmail: self.user.email, fullName: self.user.fullname, password: self.user.password) { (result) in
+                        FBAuth.createUser(withEmail: self.user.email, name: self.user.fullname, password: self.user.password) { (result) in
                             switch result {
                             case .failure(let error):
                                 self.errorString = error.localizedDescription
@@ -59,12 +59,14 @@ struct SignUpView: View {
                         }
                     }) {
                         Text("Register")
-                    }.padding(.vertical, 5)
-                        .frame(width: 200)
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .opacity(user.isComplete ? 1 : 0.75)
-                        .disabled(!user.isComplete)
+                            .frame(width: 200)
+                            .padding(.vertical, 15)
+                            .background(Color.green)
+                            .cornerRadius(8)
+                            .foregroundColor(.white)
+                            .opacity(user.isComplete ? 1 : 0.75)
+                    }
+                    .disabled(!user.isComplete)
                     Spacer()
                 }.padding()
                     .alert(isPresented: $showError) {

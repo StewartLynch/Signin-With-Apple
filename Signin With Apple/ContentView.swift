@@ -1,38 +1,39 @@
 //
-//  ContentView.swift
-//  Signin With Apple
+//  MyTabsView.swift
+//  MyAppsTasksCD
 //
-//  Created by Stewart Lynch on 2020-03-18.
-//  Copyright © 2020 CreaTECH Solutions. All rights reserved.
+//  Created by Stewart Lynch on 10/28/19.
+//  Copyright © 2019 Stewart Lynch. All rights reserved.
 //
 
 import SwiftUI
-import Firebase
 
 struct ContentView: View {
-    @EnvironmentObject var userInfo: UserInfo
+    @EnvironmentObject var userInfo:UserInfo
     var body: some View {
-        NavigationView {
-            Text("Logged in as \(userInfo.user.name)")
-                .navigationBarTitle("Log In To Firebase")
-                .navigationBarItems(trailing: Button("Logout"){
-                    FBAuth.logout { (result) in
-                        print("Logged out \(result)")
-                    }
-                })
-                .onAppear {
-                    guard  let uid = Auth.auth().currentUser?.uid else { return }
-                 FBFirestore.retrieveFBUser(uid:uid) { (result) in
-                                               switch result {
-                                               case .failure(let error):
-                                                print(error.localizedDescription)
-                                               case .success(let fbUser):
-                                                   self.userInfo.user = fbUser
-                                               }
-                                           }
+        ZStack {
+            if userInfo.isUserAuthenticated == .undefined {
+                Text("Loading...")
+            } else if userInfo.isUserAuthenticated == .signedOut {
+                LoginView()
+            } else if userInfo.isUserAuthenticated == .signedIn {
+                TabView {
+                    HomeView()
+                        .tabItem {
+                            Image(systemName: "house.fill")
+                            Text("Home")
+                    }.tag(1)
+                    Text("Let's Go Driving")
+                        .tabItem {
+                            Image(systemName: "car.fill")
+                            Text("Travel")
+                    }.tag(2)
+                }
             }
+        }.onAppear {
+            self.userInfo.configureFirebaseStateDidChange()
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        
     }
 }
 
@@ -41,3 +42,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+    

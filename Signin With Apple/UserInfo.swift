@@ -9,24 +9,14 @@
 import SwiftUI
 import FirebaseAuth
 
-enum FBAuthState {
-    case undefined, signedOut, signedIn
-}
 
 class UserInfo: ObservableObject {
-//    @Published var country:String = UserDefaults.standard.object(forKey: "country") as? String ?? "US" {
-//        didSet {
-//            UserDefaults.standard.set(country, forKey: "country")
-//        }
-//    }
-//    @Published var showCompleted:Bool = UserDefaults.standard.bool(forKey: "showCompleted") {
-//        didSet {
-//            UserDefaults.standard.set(_showCompleted, forKey: "showCompleted")
-//        }
-//    }
-    var devMode = false
+    enum FBAuthState {
+        case undefined, signedOut, signedIn
+    }
+    
     @Published var isUserAuthenticated: FBAuthState = .undefined
-    @Published var user: FBUser = FBUser(uid: "", name: "", email: "")
+    @Published var user: FBUser = FBUser(uid: "", name: "", email: "", sharedResources: "")
     
     var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
     
@@ -34,7 +24,6 @@ class UserInfo: ObservableObject {
     func configureFirebaseStateDidChange() {
         authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             guard let user = user else {
-//                print("User is signed out")
                 self.isUserAuthenticated = .signedOut
                 return
             }

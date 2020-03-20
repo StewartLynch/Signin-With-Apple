@@ -16,6 +16,8 @@ typealias SignInWithAppleResult = (authDataResult: AuthDataResult, appleIDCreden
 
 struct FBAuth {
     
+    
+    
     // MARK: - Sign In with Email functions
     
     static func resetPassword(email:String, resetCompletion:@escaping (String,String) -> Void) {
@@ -112,23 +114,10 @@ struct FBAuth {
         
         let email = signInWithAppleResult.authDataResult.user.email ?? ""
         
-        var data: [String: Any]
         
-        // If name is not "" this must be a new entry so add all first time data
-        if name != "" {
-            data = [
-                FBKeys.User.uid: uid,
-                FBKeys.User.name: name,
-                FBKeys.User.email: email
-            ]
-        } else {
-            // This is a subsequent entry so only merge uid and email so as not
-            // to overrwrite any other data.
-            data = [
-                FBKeys.User.uid: uid,
-                FBKeys.User.email: email
-            ]
-        }
+        let data = FBUser.dataDict(uid: uid,
+                                         name: name,
+                                         email: email)
         
         // Now create or merge the User in Firestore DB
         FBFirestore.mergeFBUser(data, uid: uid) { (result) in
@@ -181,7 +170,7 @@ struct FBAuth {
     
     // MARK: - FB Firestore User creation
     static func createUser(withEmail email:String,
-                           fullName: String,
+                           name: String,
                            password:String,
                            completionHandler:@escaping (Result<Bool,Error>) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
@@ -193,21 +182,9 @@ struct FBAuth {
                 completionHandler(.failure(error!))
                 return
             }
-            
-            var data: [String: Any]
-            
-            if fullName != "" {
-                data = [
-                    FBKeys.User.uid: authResult!.user.uid,
-                    FBKeys.User.name: fullName,
-                    FBKeys.User.email: authResult!.user.email!
-                ]
-            } else {
-                data = [
-                    FBKeys.User.uid: authResult!.user.uid,
-                    FBKeys.User.email: email
-                ]
-            }
+            let data = FBUser.dataDict(uid: authResult!.user.uid,
+                                             name: name,
+                                             email: authResult!.user.email!)
             
             FBFirestore.mergeFBUser(data, uid: authResult!.user.uid) { (result) in
                 completionHandler(result)

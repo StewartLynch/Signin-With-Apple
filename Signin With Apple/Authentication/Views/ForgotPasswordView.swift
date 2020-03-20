@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ForgotPasswordView: View {
     @State var user: UserViewModel = UserViewModel()
-//    @State private var email:String = ""
     @State private var showCompletion = false
     @State private var title = ""
     @State private var message = ""
@@ -19,7 +18,6 @@ struct ForgotPasswordView: View {
         NavigationView {
             VStack {
                 TextField("Enter email address", text: $user.email).autocapitalization(.none).keyboardType(.emailAddress)
-                
                 Button(action: {
                     FBAuth.resetPassword(email: self.user.email) { (title, message) in
                         self.title = title
@@ -31,8 +29,9 @@ struct ForgotPasswordView: View {
                         .frame(width: 200)
                         .padding(.vertical, 15)
                         .background(Color.green)
-                        .opacity(user.isEmailValid(_email: user.email) ? 1 : 0.75)
+                        .cornerRadius(8)
                         .foregroundColor(.white)
+                        .opacity(user.isEmailValid(_email: user.email) ? 1 : 0.75)
                 }
                 .disabled(!user.isEmailValid(_email: user.email))
                 Spacer()

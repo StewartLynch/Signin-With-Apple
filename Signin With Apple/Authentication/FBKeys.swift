@@ -17,5 +17,8 @@ struct FBKeys {
         static let uid = "uid"
         static let name = "name"
         static let email = "email"
+        
+        // App Specific
+        static let sharedResources = "sharedResources"
     }
 }
