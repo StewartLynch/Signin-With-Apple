@@ -10,7 +10,6 @@ import SwiftUI
 
 struct MyTabsView: View {
     @EnvironmentObject var userInfo:UserInfo
-    @ObservedObject var appVM = AppVM()
     var body: some View {
         ZStack {
             if userInfo.isUserAuthenticated == .undefined {
@@ -19,7 +18,7 @@ struct MyTabsView: View {
                 LoginView()
             } else if userInfo.isUserAuthenticated == .signedIn {
                 TabView {
-                    ContentView(appVM: appVM)
+                    ContentView()
                         .tabItem {
                             Image(systemName: "house.fill")
                             Text("Home")

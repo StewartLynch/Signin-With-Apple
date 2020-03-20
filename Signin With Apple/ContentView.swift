@@ -11,7 +11,6 @@ import Firebase
 
 struct ContentView: View {
     @EnvironmentObject var userInfo: UserInfo
-    @ObservedObject var appVM:AppVM
     var body: some View {
         NavigationView {
             Text("Logged in as \(userInfo.user.name)")
@@ -39,6 +38,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(appVM: AppVM())
+        ContentView()
     }
 }
