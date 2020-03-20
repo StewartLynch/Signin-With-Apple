@@ -22,3 +22,7 @@ struct SignInWithAppleAuthError: Error {
     static let noIdTokenString = NSError(domain: "Unable to serialize token string from data", code: 302, userInfo: nil)
     static let noAppleIDCredential = NSError(domain: "Unable to create Apple ID Credential", code: 303, userInfo: nil)
 }
+
+struct CreateUserError: Error {
+    
+}

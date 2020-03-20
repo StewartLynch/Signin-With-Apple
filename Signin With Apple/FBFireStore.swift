@@ -43,6 +43,8 @@ struct FBFirestore {
         }
     }
     
+    
+    
     // MARK: - fileprivate
     
     fileprivate static func getDocument(for reference: DocumentReference, completion: @escaping (Result<[String : Any], Error>) -> ()) {

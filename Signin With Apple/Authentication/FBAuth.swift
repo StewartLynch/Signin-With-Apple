@@ -14,6 +14,43 @@ import AuthenticationServices
 typealias SignInWithAppleResult = (authDataResult: AuthDataResult, appleIDCredential: ASAuthorizationAppleIDCredential)
 
 struct FBAuth {
+    
+    enum AuthError: Error {
+           case incorrectPassword
+           case invalideEmail
+           case accoundDoesNotExist
+           case unknownError
+           case couldNotCreate
+           case extraDataNotCreated
+       }
+   
+    static func authenticate(withEmail email :String,
+                      password:String,
+                      completionHandler:@escaping (AuthDataResult?, FBAuth.AuthError?) -> ()) {
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+            var newError:NSError
+            if let err = error {
+                
+                newError = err as NSError
+                var authError:FBAuth.AuthError?
+                switch newError.code {
+                case 17009:
+                    authError = FBAuth.AuthError.incorrectPassword
+                case 17008:
+                    authError = FBAuth.AuthError.invalideEmail
+                case 17011:
+                    authError = FBAuth.AuthError.accoundDoesNotExist
+                default:
+                    authError = FBAuth.AuthError.unknownError
+                }
+                completionHandler(nil,authError)
+            } else {
+                completionHandler(authResult,nil)
+            }
+        }
+    }
+    
     struct providerID {
            static let apple = "apple.com"
        }
@@ -134,4 +171,71 @@ struct FBAuth {
 
            return hashString
        }
+    
+    static func createUser(withEmail email:String,
+                           fullName: String,
+                           password:String,
+                    completionHandler:@escaping (Result<Bool,Error>) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            if let err = error {
+                print("error 1")
+                completionHandler(.failure(error!))
+                return
+            }
+            guard let _ = authResult?.user else {
+                print("Error 2")
+                completionHandler(.failure(error!))
+                return
+            }
+            
+            var data: [String: Any]
+            
+            if fullName != "" {
+                data = [
+                    FBKeys.User.uid: authResult!.user.uid,
+                    FBKeys.User.name: fullName,
+                    FBKeys.User.email: authResult!.user.email!
+                ]
+            } else {
+                data = [
+                    FBKeys.User.uid: authResult!.user.uid,
+                    FBKeys.User.email: email
+                ]
+            }
+            
+
+            FBFirestore.mergeProfile(data, uid: authResult!.user.uid) { (result) in
+                completionHandler(result)
+                
+            }
+            
+            
+            
+//            let db = Firestore.firestore()
+//            guard let userID = authResult?.user.uid else { return }
+//            // This creates a user in the User database using the users's uid as the documentID
+//            db.collection("users").document(userID).setData([
+//                "email":authResult!.user.email!,
+//                "uid": authResult!.user.uid,
+//
+//                "sharedResources": "[]"
+//            ]) { (error) in
+//                if error != nil {
+//                    completionHandler(nil, error?.localizedDescription)
+//                    return
+//                }
+//            }
+            completionHandler(.success(true))
+        }
+    }
+    
+    static func resetPassword(email:String, resetCompletion:@escaping (String,String) -> Void) {
+            Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
+                    if let error = error {
+                        resetCompletion("Reset Failed", error.localizedDescription)
+                    } else {
+                        resetCompletion("","Success. Reset email sent successfully, Check your email")
+                    }
+                }
+            )}
 }
