@@ -18,7 +18,7 @@
 		BB53B0142422CDC400FDE6AA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB53B0132422CDC400FDE6AA /* Preview Assets.xcassets */; };
 		BB53B0172422CDC400FDE6AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB53B0152422CDC400FDE6AA /* LaunchScreen.storyboard */; };
 		BB53B01F2422CF7300FDE6AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB53B01E2422CF7300FDE6AA /* GoogleService-Info.plist */; };
-		BB53B0222422D4F300FDE6AA /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B0212422D4F200FDE6AA /* UserSettings.swift */; };
+		BB53B0222422D4F300FDE6AA /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B0212422D4F200FDE6AA /* UserInfo.swift */; };
 		BB53B0242422D51E00FDE6AA /* MyTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B0232422D51E00FDE6AA /* MyTabsView.swift */; };
 		BB53B0262422D81100FDE6AA /* AppVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B0252422D81100FDE6AA /* AppVM.swift */; };
 		BB53B0282422D86800FDE6AA /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B0272422D86800FDE6AA /* UserViewModel.swift */; };
@@ -48,7 +48,7 @@
 		BB53B0182422CDC400FDE6AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB53B01E2422CF7300FDE6AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BB53B0202422D3AD00FDE6AA /* Signin With Apple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Signin With Apple.entitlements"; sourceTree = "<group>"; };
-		BB53B0212422D4F200FDE6AA /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		BB53B0212422D4F200FDE6AA /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		BB53B0232422D51E00FDE6AA /* MyTabsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTabsView.swift; sourceTree = "<group>"; };
 		BB53B0252422D81100FDE6AA /* AppVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVM.swift; sourceTree = "<group>"; };
 		BB53B0272422D86800FDE6AA /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 				BB53B00C2422CDC300FDE6AA /* SceneDelegate.swift */,
 				BB53B0252422D81100FDE6AA /* AppVM.swift */,
 				BB53B0272422D86800FDE6AA /* UserViewModel.swift */,
-				BB53B0212422D4F200FDE6AA /* UserSettings.swift */,
+				BB53B0212422D4F200FDE6AA /* UserInfo.swift */,
 				BB53B0312422E2C800FDE6AA /* DocumentSerializable.swift */,
 				BB0B48EA24233E620057B18C /* FBFireStore.swift */,
 				BBD8C2F42423F51D00F713AC /* Authentication */,
@@ -288,7 +288,7 @@
 				BB0B48EB24233E620057B18C /* FBFireStore.swift in Sources */,
 				BB0B48E724233CB70057B18C /* FBAuth.swift in Sources */,
 				BB0B48E924233D410057B18C /* FBError.swift in Sources */,
-				BB53B0222422D4F300FDE6AA /* UserSettings.swift in Sources */,
+				BB53B0222422D4F300FDE6AA /* UserInfo.swift in Sources */,
 				BB53B00D2422CDC300FDE6AA /* SceneDelegate.swift in Sources */,
 				BB53B0342422EB8500FDE6AA /* SignInWithAppleView.swift in Sources */,
 				BB53B0262422D81100FDE6AA /* AppVM.swift in Sources */,

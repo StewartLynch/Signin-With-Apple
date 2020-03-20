@@ -13,7 +13,7 @@ enum FBAuthState {
     case undefined, signedOut, signedIn
 }
 
-class UserSettings: ObservableObject {
+class UserInfo: ObservableObject {
 //    @Published var country:String = UserDefaults.standard.object(forKey: "country") as? String ?? "US" {
 //        didSet {
 //            UserDefaults.standard.set(country, forKey: "country")

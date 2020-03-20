@@ -10,11 +10,11 @@ import SwiftUI
 import Firebase
 
 struct ContentView: View {
-    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var userInfo: UserInfo
     @ObservedObject var appVM:AppVM
     var body: some View {
         NavigationView {
-            Text("Logged in as \(userSettings.user.name)")
+            Text("Logged in as \(userInfo.user.name)")
                 .navigationBarTitle("Log In To Firebase Demo")
                 .navigationBarItems(trailing: Button("Logout"){
                     FBAuth.logout { (result) in
@@ -28,7 +28,7 @@ struct ContentView: View {
                                                case .failure(let error):
                                                    print(error)
                                                case .success(let fbUser):
-                                                   self.userSettings.user = fbUser
+                                                   self.userInfo.user = fbUser
                                                }
                                            }
             }

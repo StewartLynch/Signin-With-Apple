@@ -9,15 +9,15 @@
 import SwiftUI
 
 struct MyTabsView: View {
-    @EnvironmentObject var userSettings:UserSettings
+    @EnvironmentObject var userInfo:UserInfo
     @ObservedObject var appVM = AppVM()
     var body: some View {
         ZStack {
-            if userSettings.isUserAuthenticated == .undefined {
+            if userInfo.isUserAuthenticated == .undefined {
                 Text("Loading...")
-            } else if userSettings.isUserAuthenticated == .signedOut {
+            } else if userInfo.isUserAuthenticated == .signedOut {
                 LoginView()
-            } else if userSettings.isUserAuthenticated == .signedIn {
+            } else if userInfo.isUserAuthenticated == .signedIn {
                 TabView {
                     ContentView(appVM: appVM)
                         .tabItem {
@@ -30,7 +30,7 @@ struct MyTabsView: View {
                 }
             }
         }.onAppear {
-            self.userSettings.configureFirebaseStateDidChange()
+            self.userInfo.configureFirebaseStateDidChange()
         }
         
     }

@@ -11,7 +11,7 @@ import AuthenticationServices
 
 struct SignInWithAppleView: UIViewRepresentable {
     
-    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var userInfo: UserInfo
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
     }

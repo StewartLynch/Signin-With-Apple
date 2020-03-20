@@ -9,9 +9,10 @@
 import SwiftUI
 
 struct SignInWithEmailView: View {
-    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var userInfo: UserInfo
     @State var user: UserViewModel = UserViewModel()
     @State private var showAlert = false
+    @State private var authError:AuthError?
     @State private var errString:String = ""
     @Binding var showSheet: Bool
     @Binding var action:LoginView.Action?
@@ -36,7 +37,8 @@ struct SignInWithEmailView: View {
                     FBAuth.authenticate(withEmail: self.user.email, password: self.user.password) { (result) in
                         switch result {
                         case .failure(let error):
-                            self.errString = error.localizedDescription
+                            self.authError = error
+//                            self.errString = error.localizedDescription
                             self.showAlert = true
                         case .success( _):
                             print("Signed in")
@@ -64,9 +66,15 @@ struct SignInWithEmailView: View {
                 }
             }
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("Login Error"), message: Text(self.errString), dismissButton:.default(Text("OK")){
-                    self.user.email = ""
-                    self.user.password = ""
+
+                Alert(title: Text("Login Error"), message: Text(self.authError?.localizedDescription ?? "Unknown error"), dismissButton:.default(Text("OK")){
+                    switch self.authError {
+                    case .incorrectPassword:
+                        self.user.password = ""
+                    default:
+                        self.user.email = ""
+                        self.user.password = ""
+                    }
                 })
             }
         }
