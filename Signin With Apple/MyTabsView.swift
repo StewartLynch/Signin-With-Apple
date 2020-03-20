@@ -21,11 +21,13 @@ struct MyTabsView: View {
                 TabView {
                     ContentView(appVM: appVM)
                         .tabItem {
-                            Text("Content View")
+                            Image(systemName: "house.fill")
+                            Text("Home")
                     }.tag(1)
-                    Text("Tab Content 2")
+                    Text("Let's Go Driving")
                         .tabItem {
-                            Text("Tab Label 2")
+                            Image(systemName: "car.fill")
+                            Text("Travel")
                     }.tag(2)
                 }
             }

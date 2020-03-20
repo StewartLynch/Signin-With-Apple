@@ -8,36 +8,74 @@
 
 import Foundation
 
-struct FBAuthError: Error {
-    static let noAuthDataResult = NSError(domain: "No Auth Data Result", code: 400, userInfo: nil)
-    static let noCurrentUser = NSError(domain: "No Current User", code: 401, userInfo: nil)
-    static let noDocumentSnapshot = NSError(domain: "No Document Snapshot", code: 402, userInfo: nil)
-    static let noSnapshotData = NSError(domain: "No Snapshot Data", code: 403, userInfo: nil)
-    static let noUser = NSError(domain: "No User", code: 404, userInfo: nil)
+// MARK: - Firstore errors
+enum FireStoreError: Error {
+    case noAuthDataResult
+    case noCurrentUser
+    case noDocumentSnapshot
+    case noSnapshotData
+    case noUser
 }
 
-struct SignInWithAppleAuthError: Error {
-    static let noAuthDataResult = NSError(domain: "No Auth Data Result", code: 300, userInfo: nil)
-    static let noIdentityToken = NSError(domain: "Unable to fetch identity token", code: 301, userInfo: nil)
-    static let noIdTokenString = NSError(domain: "Unable to serialize token string from data", code: 302, userInfo: nil)
-    static let noAppleIDCredential = NSError(domain: "Unable to create Apple ID Credential", code: 303, userInfo: nil)
+extension FireStoreError: LocalizedError {
+    // This will provide me with a specific localized description for the FireStoreError
+    var errorDescription: String? {
+        switch self {
+        case .noAuthDataResult:
+            return NSLocalizedString("No Auth Data Result", comment: "")
+        case .noCurrentUser:
+            return NSLocalizedString("No Current User", comment: "")
+        case .noDocumentSnapshot:
+            return NSLocalizedString("No Document Snapshot", comment: "")
+        case .noSnapshotData:
+            return NSLocalizedString("No Snapshot Data", comment: "")
+        case .noUser:
+            return NSLocalizedString("No User", comment: "")
+        }
+    }
 }
 
-enum AuthError: Error {
+// MARK: - SignIn with Apple Erors
+enum SignInWithAppleAuthError: Error {
+    case noAuthDataResult
+    case noIdentityToken
+    case noIdTokenString
+    case noAppleIDCredential
+}
+
+extension SignInWithAppleAuthError: LocalizedError {
+    // This will provide me with a specific localized description for the SignInWithAppleAuthError
+    var errorDescription: String? {
+        switch self {
+        case .noAuthDataResult:
+            return NSLocalizedString("No Auth Data Result", comment: "")
+        case .noIdentityToken:
+            return NSLocalizedString("Unable to fetch identity token", comment: "")
+        case .noIdTokenString:
+            return NSLocalizedString("Unable to serialize token string from data", comment: "")
+        case .noAppleIDCredential:
+            return NSLocalizedString("Unable to create Apple ID Credential", comment: "")
+        }
+    }
+}
+
+// MARK: - Signin in with email errors
+enum EmailAuthError: Error {
     case incorrectPassword
-    case invalideEmail
+    case invalidEmail
     case accoundDoesNotExist
     case unknownError
     case couldNotCreate
     case extraDataNotCreated
 }
 
-extension AuthError: LocalizedError {
+extension EmailAuthError: LocalizedError {
+    // This will provide me with a specific localized description for the EmailAuthError
     var errorDescription: String? {
         switch self {
         case .incorrectPassword:
             return NSLocalizedString("Incorrect Password for this account", comment: "")
-        case .invalideEmail:
+        case .invalidEmail:
              return NSLocalizedString("Not a valid email address.", comment: "")
         case .accoundDoesNotExist:
             return NSLocalizedString("Not a valid email address.  This account does not exist.", comment: "")

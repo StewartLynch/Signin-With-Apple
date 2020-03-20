@@ -12,7 +12,7 @@ struct SignInWithEmailView: View {
     @EnvironmentObject var userInfo: UserInfo
     @State var user: UserViewModel = UserViewModel()
     @State private var showAlert = false
-    @State private var authError:AuthError?
+    @State private var authError:EmailAuthError?
     @State private var errString:String = ""
     @Binding var showSheet: Bool
     @Binding var action:LoginView.Action?
@@ -38,7 +38,6 @@ struct SignInWithEmailView: View {
                         switch result {
                         case .failure(let error):
                             self.authError = error
-//                            self.errString = error.localizedDescription
                             self.showAlert = true
                         case .success( _):
                             print("Signed in")

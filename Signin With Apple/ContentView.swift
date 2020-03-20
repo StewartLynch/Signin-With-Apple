@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Text("Logged in as \(userInfo.user.name)")
-                .navigationBarTitle("Log In To Firebase Demo")
+                .navigationBarTitle("Log In To Firebase")
                 .navigationBarItems(trailing: Button("Logout"){
                     FBAuth.logout { (result) in
                         print("Logged out \(result)")
@@ -26,7 +26,7 @@ struct ContentView: View {
                  FBFirestore.retrieveFBUser(uid:uid) { (result) in
                                                switch result {
                                                case .failure(let error):
-                                                   print(error)
+                                                print(error.localizedDescription)
                                                case .success(let fbUser):
                                                    self.userInfo.user = fbUser
                                                }

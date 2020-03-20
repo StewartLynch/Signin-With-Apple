@@ -18,7 +18,7 @@ struct FBFirestore {
             switch result {
             case .success(let data):
                 guard let user = FBUser(documentData: data) else {
-                    completion(.failure(FBAuthError.noUser))
+                    completion(.failure(FireStoreError.noUser))
                     return
                 }
                 completion(.success(user))
@@ -29,7 +29,7 @@ struct FBFirestore {
         
     }
     
-    static func mergeProfile(_ data: [String: Any], uid: String, completion: @escaping (Result<Bool, Error>) -> ()) {
+    static func mergeFBUser(_ data: [String: Any], uid: String, completion: @escaping (Result<Bool, Error>) -> ()) {
         let reference = Firestore
             .firestore()
             .collection(FBKeys.CollectionPath.users)
@@ -54,11 +54,11 @@ struct FBFirestore {
                 return
             }
             guard let documentSnapshot = documentSnapshot else {
-                completion(.failure(FBAuthError.noDocumentSnapshot))
+                completion(.failure(FireStoreError.noDocumentSnapshot))
                 return
             }
             guard let data = documentSnapshot.data() else {
-                completion(.failure(FBAuthError.noSnapshotData))
+                completion(.failure(FireStoreError.noSnapshotData))
                 return
             }
             completion(.success(data))

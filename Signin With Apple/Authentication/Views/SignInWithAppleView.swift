@@ -25,7 +25,6 @@ struct SignInWithAppleView: UIViewRepresentable {
     func updateUIView(_ uiView: ASAuthorizationAppleIDButton, context: Context) {
     }
     
-    
     class Coordinator: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
         
         let parent: SignInWithAppleView?
@@ -68,7 +67,7 @@ struct SignInWithAppleView: UIViewRepresentable {
         
         func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
             
-            guard let parent = parent else {
+            guard let _ = parent else {
                 fatalError("No parent found")
             }
             
@@ -78,54 +77,45 @@ struct SignInWithAppleView: UIViewRepresentable {
                 }
                 guard let appleIDToken = appleIDCredential.identityToken else {
                     print("Unable to fetch identity token")
-//                    parent.stopActivityIndicator()
-//                    parent.presentAlert(title: "Error", message: "Unable to fetch identity token")
                     return
                 }
                 guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
                     print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
-//                    parent.stopActivityIndicator()
-//                    parent.presentAlert(title: "Error", message: "Unable to serialize token string from data")
                     return
                 }
                 
-//                parent.updateActivityIndicator(message: "Authenticating...")
-                FBAuth.signIn(providerID: FBAuth.providerID.apple, idTokenString: idTokenString, nonce: nonce) { (result) in
+                FBAuth.signInWithApple(idTokenString: idTokenString, nonce: nonce) { (result) in
+                    // result is Result<AuthDataResult, Error>
                     switch result {
                     case .success(let authDataResult):
+                        // User has successfully connected with apple so let's now deal with the response
                         let signInWithAppleResult = (authDataResult, appleIDCredential)
                         FBAuth.handle(signInWithAppleResult) { (result) in
                             switch result {
                             case .success(let profile):
                                 print("Successfully Signed in with Apple into Firebase: \(profile)")
-                                
-//                                parent.stopActivityIndicator()
+
                             case .failure(let err):
                                 print(err.localizedDescription)
-//                                parent.stopActivityIndicator()
-//                                parent.presentAlert(title: "Error", message: err.localizedDescription)
+
                             }
                         }
                     case .failure(let err):
                         print(err.localizedDescription)
-//                        parent.stopActivityIndicator()
-//                        parent.presentAlert(title: "Error", message: err.localizedDescription)
+
                     }
                 }
                 
             } else {
-//                parent.stopActivityIndicator()
-//                parent.presentAlert(title: "Error", message: "No Apple ID Credential found")
+
             }
         }
         
         func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-            guard let parent = parent else {
+            guard let _ = parent else {
                 fatalError("No parent found")
             }
             print("parent found")
-//            parent.stopActivityIndicator()
-//            parent.presentAlert(title: "Error", message: error.localizedDescription)
         }    }
 }
 
