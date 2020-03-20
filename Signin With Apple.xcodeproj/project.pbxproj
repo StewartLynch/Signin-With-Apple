@@ -114,21 +114,16 @@
 			isa = PBXGroup;
 			children = (
 				BB53B0202422D3AD00FDE6AA /* Signin With Apple.entitlements */,
-				BB53B0212422D4F200FDE6AA /* UserSettings.swift */,
 				BB53B0232422D51E00FDE6AA /* MyTabsView.swift */,
 				BB53B00A2422CDC300FDE6AA /* AppDelegate.swift */,
 				BB53B00C2422CDC300FDE6AA /* SceneDelegate.swift */,
 				BB53B0252422D81100FDE6AA /* AppVM.swift */,
 				BB53B0272422D86800FDE6AA /* UserViewModel.swift */,
+				BB53B0212422D4F200FDE6AA /* UserSettings.swift */,
 				BB53B0312422E2C800FDE6AA /* DocumentSerializable.swift */,
 				BB0B48EA24233E620057B18C /* FBFireStore.swift */,
 				BBD8C2F42423F51D00F713AC /* Authentication */,
 				BB53B00E2422CDC300FDE6AA /* ContentView.swift */,
-				BB53B0292422DA6600FDE6AA /* LoginView.swift */,
-				BBD8C2F72423F92400F713AC /* ForgotPasswordView.swift */,
-				BB53B0332422EB8500FDE6AA /* SignInWithAppleView.swift */,
-				BBD8C2F52423F78900F713AC /* SignInWithEmailView.swift */,
-				BBD8C2F92423F9A000F713AC /* SignUpView.swift */,
 				BB53B0102422CDC400FDE6AA /* Assets.xcassets */,
 				BB53B0152422CDC400FDE6AA /* LaunchScreen.storyboard */,
 				BB53B0182422CDC400FDE6AA /* Info.plist */,
@@ -146,9 +141,22 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		BB6C83F924251A3E004C23BD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB53B0292422DA6600FDE6AA /* LoginView.swift */,
+				BBD8C2F72423F92400F713AC /* ForgotPasswordView.swift */,
+				BB53B0332422EB8500FDE6AA /* SignInWithAppleView.swift */,
+				BBD8C2F52423F78900F713AC /* SignInWithEmailView.swift */,
+				BBD8C2F92423F9A000F713AC /* SignUpView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		BBD8C2F42423F51D00F713AC /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				BB6C83F924251A3E004C23BD /* Views */,
 				BB53B02D2422E21500FDE6AA /* FBUser.swift */,
 				BB0B48E624233CB70057B18C /* FBAuth.swift */,
 				BB0B48E824233D410057B18C /* FBError.swift */,

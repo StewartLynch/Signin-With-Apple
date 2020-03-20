@@ -41,6 +41,5 @@ class UserSettings: ObservableObject {
             self.isUserAuthenticated = .signedIn
             print("Successfully authenticated user with uid: \(user.uid)")
         })
-        //        self.isUserAuthenticated = .signedIn
     }
 }
