@@ -7,19 +7,31 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ContentView: View {
     @EnvironmentObject var userSettings: UserSettings
     @ObservedObject var appVM:AppVM
     var body: some View {
         NavigationView {
-            Text("User is logged in!")
+            Text("Logged in as \(userSettings.user.name)")
                 .navigationBarTitle("Log In To Firebase Demo")
                 .navigationBarItems(trailing: Button("Logout"){
                     FBAuth.logout { (result) in
                         print("Logged out \(result)")
                     }
                 })
+                .onAppear {
+                    guard  let uid = Auth.auth().currentUser?.uid else { return }
+                 FBFirestore.retrieveFBUser(uid:uid) { (result) in
+                                               switch result {
+                                               case .failure(let error):
+                                                   print(error)
+                                               case .success(let fbUser):
+                                                   self.userSettings.user = fbUser
+                                               }
+                                           }
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }

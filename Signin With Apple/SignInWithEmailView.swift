@@ -33,28 +33,15 @@ struct SignInWithEmailView: View {
             }.padding(.bottom)
             VStack(spacing: 10) {
                 Button(action: {
-                    FBAuth.authenticate(withEmail: self.user.email, password: self.user.password) { (result, error) in
-                        if let error = error {
-                            print(error)
-                        } else {
-                            print("Logged in as \(String(describing: result?.user.uid))")
-                            self.user.email = ""
-                            self.user.password = ""
+                    FBAuth.authenticate(withEmail: self.user.email, password: self.user.password) { (result) in
+                        switch result {
+                        case .failure(let error):
+                            self.errString = error.localizedDescription
+                            self.showAlert = true
+                        case .success( _):
+                            print("Signed in")
                         }
-                        
                     }
-//                    FBAuth.authenticate(withEmail: self.user.email,
-//                                                password: self.user.password) { (result, error) in
-//                                                    if let error = error {
-//                                                        print(error.rawValue)
-//                                                        self.showAlert = true
-//                                                        self.errString = error.rawValue
-//                                                        return
-//                                                    }
-//                                                    print("Logged in as \(String(describing: result?.user.uid))")
-//                                                    self.user.email = ""
-//                                                    self.user.password = ""
-//                    }
                 }) {
                     Text("Login")
                         .padding(.vertical, 15)
@@ -75,8 +62,12 @@ struct SignInWithEmailView: View {
                         .cornerRadius(8)
                         .foregroundColor(.white)
                 }
-            }.alert(isPresented: $showAlert) {
-                Alert(title: Text("Login Error"), message: Text(self.errString), dismissButton:.default(Text("OK")))
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Login Error"), message: Text(self.errString), dismissButton:.default(Text("OK")){
+                    self.user.email = ""
+                    self.user.password = ""
+                })
             }
         }
         .padding(.top, 100)

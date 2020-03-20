@@ -98,6 +98,7 @@ struct SignInWithAppleView: UIViewRepresentable {
                             switch result {
                             case .success(let profile):
                                 print("Successfully Signed in with Apple into Firebase: \(profile)")
+                                
 //                                parent.stopActivityIndicator()
                             case .failure(let err):
                                 print(err.localizedDescription)

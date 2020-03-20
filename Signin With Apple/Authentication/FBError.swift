@@ -23,6 +23,34 @@ struct SignInWithAppleAuthError: Error {
     static let noAppleIDCredential = NSError(domain: "Unable to create Apple ID Credential", code: 303, userInfo: nil)
 }
 
-struct CreateUserError: Error {
-    
+enum AuthError: Error {
+    case incorrectPassword
+    case invalideEmail
+    case accoundDoesNotExist
+    case unknownError
+    case couldNotCreate
+    case extraDataNotCreated
 }
+
+extension AuthError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .incorrectPassword:
+            return NSLocalizedString("Incorrect Password for this account", comment: "")
+        case .invalideEmail:
+             return NSLocalizedString("Not a valid email address.", comment: "")
+        case .accoundDoesNotExist:
+            return NSLocalizedString("Not a valid email address.  This account does not exist.", comment: "")
+        case .unknownError:
+            return NSLocalizedString("Unknown error.  Cannot log in.", comment: "")
+        case .couldNotCreate:
+            return NSLocalizedString("Could not create user at this time.", comment: "")
+        case .extraDataNotCreated:
+            return NSLocalizedString("Could not save user's full name.", comment: "")
+        }
+    }
+}
+
+
+
+

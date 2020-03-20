@@ -14,39 +14,28 @@ import AuthenticationServices
 typealias SignInWithAppleResult = (authDataResult: AuthDataResult, appleIDCredential: ASAuthorizationAppleIDCredential)
 
 struct FBAuth {
-    
-    enum AuthError: Error {
-           case incorrectPassword
-           case invalideEmail
-           case accoundDoesNotExist
-           case unknownError
-           case couldNotCreate
-           case extraDataNotCreated
-       }
-   
     static func authenticate(withEmail email :String,
                       password:String,
-                      completionHandler:@escaping (AuthDataResult?, FBAuth.AuthError?) -> ()) {
-        
+                      completionHandler:@escaping (Result<Bool, AuthError>) -> ()) {
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             var newError:NSError
             if let err = error {
                 
                 newError = err as NSError
-                var authError:FBAuth.AuthError?
+                var authError:AuthError?
                 switch newError.code {
                 case 17009:
-                    authError = FBAuth.AuthError.incorrectPassword
+                    authError = .incorrectPassword
                 case 17008:
-                    authError = FBAuth.AuthError.invalideEmail
+                    authError = .invalideEmail
                 case 17011:
-                    authError = FBAuth.AuthError.accoundDoesNotExist
+                    authError = .accoundDoesNotExist
                 default:
-                    authError = FBAuth.AuthError.unknownError
+                    authError = .unknownError
                 }
-                completionHandler(nil,authError)
+                completionHandler(.failure(authError!))
             } else {
-                completionHandler(authResult,nil)
+                completionHandler(.success(true))
             }
         }
     }
@@ -202,29 +191,10 @@ struct FBAuth {
                     FBKeys.User.email: email
                 ]
             }
-            
 
             FBFirestore.mergeProfile(data, uid: authResult!.user.uid) { (result) in
                 completionHandler(result)
-                
             }
-            
-            
-            
-//            let db = Firestore.firestore()
-//            guard let userID = authResult?.user.uid else { return }
-//            // This creates a user in the User database using the users's uid as the documentID
-//            db.collection("users").document(userID).setData([
-//                "email":authResult!.user.email!,
-//                "uid": authResult!.user.uid,
-//
-//                "sharedResources": "[]"
-//            ]) { (error) in
-//                if error != nil {
-//                    completionHandler(nil, error?.localizedDescription)
-//                    return
-//                }
-//            }
             completionHandler(.success(true))
         }
     }

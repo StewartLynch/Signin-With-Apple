@@ -9,7 +9,7 @@ import FirebaseFirestore
 
 struct FBFirestore {
     
-    static func retreiveProfile(uid: String, completion: @escaping (Result<FBUser, Error>) -> ()) {
+    static func retrieveFBUser(uid: String, completion: @escaping (Result<FBUser, Error>) -> ()) {
         let reference = Firestore
             .firestore()
             .collection(FBKeys.CollectionPath.users)
