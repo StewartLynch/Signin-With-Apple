@@ -13,6 +13,7 @@ struct SignUpView: View {
     @State var user: UserViewModel = UserViewModel()
     @State private var showError = false
     @State private var errorString = ""
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         NavigationView {
@@ -47,15 +48,16 @@ struct SignUpView: View {
                 VStack(spacing: 20 ) {
                     Button(action: {
                         // Signup
-                        FBAuth.createUser(withEmail: self.user.email, name: self.user.fullname, password: self.user.password) { (result) in
-                            switch result {
-                            case .failure(let error):
-                                self.errorString = error.localizedDescription
-                                self.showError = true
-                                print(error.localizedDescription)
-                            case .success(let result):
-                                print(result)
-                            }
+                        FBAuth.createUser(withEmail: self.user.email,
+                                          name: self.user.fullname,
+                                          password: self.user.password) { (result) in
+                                            switch result {
+                                            case .failure(let error):
+                                                self.errorString = error.localizedDescription
+                                                self.showError = true
+                                            case .success( _):
+                                                print("Account creation successful")
+                                            }
                         }
                     }) {
                         Text("Register")
@@ -64,16 +66,19 @@ struct SignUpView: View {
                             .background(Color.green)
                             .cornerRadius(8)
                             .foregroundColor(.white)
-                            .opacity(user.isComplete ? 1 : 0.75)
+                            .opacity(user.isSignInComplete ? 1 : 0.75)
                     }
-                    .disabled(!user.isComplete)
+                    .disabled(!user.isSignInComplete)
                     Spacer()
                 }.padding()
-                    .alert(isPresented: $showError) {
-                    Alert(title: Text("Error creating account"), message: Text(self.errorString), dismissButton:.default(Text("OK")))
-                }
             }.padding(.top)
+                .alert(isPresented: $showError) {
+                Alert(title: Text("Error creating account"), message: Text(self.errorString), dismissButton:.default(Text("OK")))
+                }
                 .navigationBarTitle("Sign Up", displayMode: .inline)
+                .navigationBarItems(trailing: Button("Dismiss") {
+                    self.presentationMode.wrappedValue.dismiss()
+                })
         }
     }
 }

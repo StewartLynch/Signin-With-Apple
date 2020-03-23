@@ -7,18 +7,17 @@
 //
 
 import Foundation
-struct FBKeys {
+enum FBKeys {
     
-    struct CollectionPath {
+    enum CollectionPath {
         static let users = "users"
     }
     
-    struct User {
+    enum User {
         static let uid = "uid"
         static let name = "name"
         static let email = "email"
         
-        // App Specific
-        static let sharedResources = "sharedResources"
+        // Add app specific keys here
     }
 }

@@ -10,19 +10,22 @@ import SwiftUI
 
 struct ForgotPasswordView: View {
     @State var user: UserViewModel = UserViewModel()
-    @State private var showCompletion = false
-    @State private var title = ""
-    @State private var message = ""
+    @State private var showAlert = false
+    @State private var errString: String?
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         NavigationView {
             VStack {
                 TextField("Enter email address", text: $user.email).autocapitalization(.none).keyboardType(.emailAddress)
                 Button(action: {
-                    FBAuth.resetPassword(email: self.user.email) { (title, message) in
-                        self.title = title
-                        self.message = message
-                        self.showCompletion = true
+                    FBAuth.resetPassword(email: self.user.email) { (result) in
+                        switch result {
+                        case .failure(let error):
+                            self.errString = error.localizedDescription
+                        case .success(_):
+                            break
+                        }
+                        self.showAlert = true
                     }
                 }) {
                     Text("Reset")
@@ -35,16 +38,21 @@ struct ForgotPasswordView: View {
                 }
                 .disabled(!user.isEmailValid(_email: user.email))
                 Spacer()
-            }.padding(.top)
-                .frame(width: 300)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .navigationBarTitle("Password Reset", displayMode: .inline)
-                .alert(isPresented: $showCompletion) {
-                    Alert(title: Text(self.title), message: Text(self.message), dismissButton: .default(Text("OK")) {
-                        self.presentationMode.wrappedValue.dismiss()
-                    })
             }
+            .padding(.top)
+            .frame(width: 300)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
             .navigationBarTitle("Request a password reset", displayMode: .inline)
+            .navigationBarItems(trailing: Button("Dismiss") {
+                self.presentationMode.wrappedValue.dismiss()
+            })
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Password Reset"),
+                          message: Text(self.errString ?? "Success. Reset email sent successfully, Check your email"),
+                          dismissButton: .default(Text("Ok")) {
+                            self.presentationMode.wrappedValue.dismiss()
+                        })
+            }
         }
     }
 }

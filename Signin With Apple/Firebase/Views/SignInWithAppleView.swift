@@ -18,6 +18,8 @@ struct SignInWithAppleView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
         let button = ASAuthorizationAppleIDButton(authorizationButtonType: .continue, authorizationButtonStyle: .whiteOutline)
+        
+        
         button.addTarget(context.coordinator, action:  #selector(Coordinator.didTapButton), for: .touchUpInside)
         return button
     }
@@ -36,27 +38,27 @@ struct SignInWithAppleView: UIViewRepresentable {
             super.init()
         }
         
-       @objc func didTapButton() {
+        @objc func didTapButton() {
             let provider = ASAuthorizationAppleIDProvider()
-        let nonce = FBAuth.randomNonceString()
-        currentNonce = nonce
-        let request = provider.createRequest()
-        // request full name and email from the user's Apple ID
-        request.requestedScopes = [.fullName, .email]
-        // pass the request to the initializer of the controller
-        let authController = ASAuthorizationController(authorizationRequests: [request])
-        
-        // similar to delegate, this will ask the VC
-        // which window to present the ASAuthorizationController
-        authController.presentationContextProvider = self
-        
-        // delegate functions will be called when the user data
-        // is successfully retrieved or error occured
-        authController.delegate = self
-        
-        // show the sign-in with Apple dialog
-        authController.performRequests()
-        
+            currentNonce = FBAuth.randomNonceString()
+            
+            let request = provider.createRequest()
+            // request full name and email from the user's Apple ID
+            request.requestedScopes = [.fullName, .email]
+            // pass the request to the initializer of the controller
+            let authController = ASAuthorizationController(authorizationRequests: [request])
+            
+            // similar to delegate, this will ask the VC
+            // which window to present the ASAuthorizationController
+            authController.presentationContextProvider = self
+            
+            // delegate functions will be called when the user data
+            // is successfully retrieved or error occured
+            authController.delegate = self
+            
+            // show the sign-in with Apple dialog
+            authController.performRequests()
+            
         }
         
         
@@ -85,23 +87,20 @@ struct SignInWithAppleView: UIViewRepresentable {
                 }
                 
                 FBAuth.signInWithApple(idTokenString: idTokenString, nonce: nonce) { (result) in
-                    // result is Result<AuthDataResult, Error>
+                    
                     switch result {
-                    case .success(let authDataResult):
-                        // User has successfully connected with apple so let's now deal with the response
-                        let signInWithAppleResult = (authDataResult, appleIDCredential)
-                        FBAuth.handle(signInWithAppleResult) { (result) in
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    case .success( let authDataResult):
+                         let signInWithAppleResult = (authDataResult, appleIDCredential)
+                         FBAuth.handle(signInWithAppleResult) { (result) in
                             switch result {
-                            case .success(let profile):
-                                print("Successfully Signed in with Apple into Firebase: \(profile)")
-
-                            case .failure(let err):
-                                print(err.localizedDescription)
+                            case .failure(let error):
+                                print(error.localizedDescription)
+                            case .success(_):
+                                print("Successful login")
                             }
                         }
-                    case .failure(let err):
-                        print(err.localizedDescription)
-
                     }
                 }
             } else {
@@ -113,7 +112,13 @@ struct SignInWithAppleView: UIViewRepresentable {
             guard let _ = parent else {
                 fatalError("No parent found")
             }
-            print("parent found")
-        }    }
+        }
+    }
 }
 
+
+struct SignInWithAppleView_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
+}

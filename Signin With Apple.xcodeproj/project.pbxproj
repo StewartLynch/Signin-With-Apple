@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3EA5402605000FCDEABDA817 /* Pods_Signin_With_Apple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 672FD510A0C4A30DDB1D0991 /* Pods_Signin_With_Apple.framework */; };
 		BB0B48E724233CB70057B18C /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B48E624233CB70057B18C /* FBAuth.swift */; };
-		BB0B48E924233D410057B18C /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B48E824233D410057B18C /* FBError.swift */; };
+		BB0B48E924233D410057B18C /* FBAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B48E824233D410057B18C /* FBAuthError.swift */; };
 		BB0B48EB24233E620057B18C /* FBFireStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B48EA24233E620057B18C /* FBFireStore.swift */; };
 		BB53B00B2422CDC300FDE6AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B00A2422CDC300FDE6AA /* AppDelegate.swift */; };
 		BB53B00D2422CDC300FDE6AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B00C2422CDC300FDE6AA /* SceneDelegate.swift */; };
@@ -24,8 +24,8 @@
 		BB53B02A2422DA6600FDE6AA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B0292422DA6600FDE6AA /* LoginView.swift */; };
 		BB53B02E2422E21500FDE6AA /* FBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B02D2422E21500FDE6AA /* FBUser.swift */; };
 		BB53B0302422E29100FDE6AA /* FBKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B02F2422E29100FDE6AA /* FBKeys.swift */; };
-		BB53B0322422E2C800FDE6AA /* DocumentSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B0312422E2C800FDE6AA /* DocumentSerializable.swift */; };
 		BB53B0342422EB8500FDE6AA /* SignInWithAppleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53B0332422EB8500FDE6AA /* SignInWithAppleView.swift */; };
+		BBA2C692242715C300A2A338 /* FBFireStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2C691242715C300A2A338 /* FBFireStoreError.swift */; };
 		BBD8C2F62423F78900F713AC /* SignInWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD8C2F52423F78900F713AC /* SignInWithEmailView.swift */; };
 		BBD8C2F82423F92400F713AC /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD8C2F72423F92400F713AC /* ForgotPasswordView.swift */; };
 		BBD8C2FA2423F9A000F713AC /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD8C2F92423F9A000F713AC /* SignUpView.swift */; };
@@ -35,7 +35,7 @@
 		39CC836CEFAD8E6965DAE416 /* Pods-Signin With Apple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signin With Apple.debug.xcconfig"; path = "Target Support Files/Pods-Signin With Apple/Pods-Signin With Apple.debug.xcconfig"; sourceTree = "<group>"; };
 		672FD510A0C4A30DDB1D0991 /* Pods_Signin_With_Apple.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Signin_With_Apple.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB0B48E624233CB70057B18C /* FBAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
-		BB0B48E824233D410057B18C /* FBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBError.swift; sourceTree = "<group>"; };
+		BB0B48E824233D410057B18C /* FBAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthError.swift; sourceTree = "<group>"; };
 		BB0B48EA24233E620057B18C /* FBFireStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBFireStore.swift; sourceTree = "<group>"; };
 		BB53B0072422CDC300FDE6AA /* Signin With Apple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Signin With Apple.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB53B00A2422CDC300FDE6AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,8 +53,8 @@
 		BB53B0292422DA6600FDE6AA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BB53B02D2422E21500FDE6AA /* FBUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBUser.swift; sourceTree = "<group>"; };
 		BB53B02F2422E29100FDE6AA /* FBKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBKeys.swift; sourceTree = "<group>"; };
-		BB53B0312422E2C800FDE6AA /* DocumentSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentSerializable.swift; sourceTree = "<group>"; };
 		BB53B0332422EB8500FDE6AA /* SignInWithAppleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleView.swift; sourceTree = "<group>"; };
+		BBA2C691242715C300A2A338 /* FBFireStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBFireStoreError.swift; sourceTree = "<group>"; };
 		BBD8C2F52423F78900F713AC /* SignInWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithEmailView.swift; sourceTree = "<group>"; };
 		BBD8C2F72423F92400F713AC /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		BBD8C2F92423F9A000F713AC /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -115,11 +115,7 @@
 				BB53B0232422D51E00FDE6AA /* ContentView.swift */,
 				BB53B00A2422CDC300FDE6AA /* AppDelegate.swift */,
 				BB53B00C2422CDC300FDE6AA /* SceneDelegate.swift */,
-				BB53B0272422D86800FDE6AA /* UserViewModel.swift */,
-				BB53B0212422D4F200FDE6AA /* UserInfo.swift */,
-				BB53B0312422E2C800FDE6AA /* DocumentSerializable.swift */,
-				BB0B48EA24233E620057B18C /* FBFireStore.swift */,
-				BBD8C2F42423F51D00F713AC /* Authentication */,
+				BBD8C2F42423F51D00F713AC /* Firebase */,
 				BB53B00E2422CDC300FDE6AA /* HomeView.swift */,
 				BB53B0102422CDC400FDE6AA /* Assets.xcassets */,
 				BB53B0152422CDC400FDE6AA /* LaunchScreen.storyboard */,
@@ -143,23 +139,43 @@
 			children = (
 				BB53B0292422DA6600FDE6AA /* LoginView.swift */,
 				BBD8C2F72423F92400F713AC /* ForgotPasswordView.swift */,
-				BB53B0332422EB8500FDE6AA /* SignInWithAppleView.swift */,
 				BBD8C2F52423F78900F713AC /* SignInWithEmailView.swift */,
 				BBD8C2F92423F9A000F713AC /* SignUpView.swift */,
+				BB53B0332422EB8500FDE6AA /* SignInWithAppleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		BBD8C2F42423F51D00F713AC /* Authentication */ = {
+		BBA2C690242714EC00A2A338 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				BB53B0212422D4F200FDE6AA /* UserInfo.swift */,
+				BB53B0272422D86800FDE6AA /* UserViewModel.swift */,
+				BB0B48E624233CB70057B18C /* FBAuth.swift */,
+				BB0B48E824233D410057B18C /* FBAuthError.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		BBA2C6932427161000A2A338 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				BB0B48EA24233E620057B18C /* FBFireStore.swift */,
+				BB53B02F2422E29100FDE6AA /* FBKeys.swift */,
+				BB53B02D2422E21500FDE6AA /* FBUser.swift */,
+				BBA2C691242715C300A2A338 /* FBFireStoreError.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
+		BBD8C2F42423F51D00F713AC /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
 				BB6C83F924251A3E004C23BD /* Views */,
-				BB53B02D2422E21500FDE6AA /* FBUser.swift */,
-				BB0B48E624233CB70057B18C /* FBAuth.swift */,
-				BB0B48E824233D410057B18C /* FBError.swift */,
-				BB53B02F2422E29100FDE6AA /* FBKeys.swift */,
+				BBA2C6932427161000A2A338 /* Firestore */,
+				BBA2C690242714EC00A2A338 /* Auth */,
 			);
-			path = Authentication;
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,13 +298,13 @@
 				BB53B0242422D51E00FDE6AA /* ContentView.swift in Sources */,
 				BB53B00B2422CDC300FDE6AA /* AppDelegate.swift in Sources */,
 				BBD8C2F82423F92400F713AC /* ForgotPasswordView.swift in Sources */,
+				BBA2C692242715C300A2A338 /* FBFireStoreError.swift in Sources */,
 				BB0B48EB24233E620057B18C /* FBFireStore.swift in Sources */,
 				BB0B48E724233CB70057B18C /* FBAuth.swift in Sources */,
-				BB0B48E924233D410057B18C /* FBError.swift in Sources */,
+				BB0B48E924233D410057B18C /* FBAuthError.swift in Sources */,
 				BB53B0222422D4F300FDE6AA /* UserInfo.swift in Sources */,
 				BB53B00D2422CDC300FDE6AA /* SceneDelegate.swift in Sources */,
 				BB53B0342422EB8500FDE6AA /* SignInWithAppleView.swift in Sources */,
-				BB53B0322422E2C800FDE6AA /* DocumentSerializable.swift in Sources */,
 				BBD8C2F62423F78900F713AC /* SignInWithEmailView.swift in Sources */,
 				BB53B02E2422E21500FDE6AA /* FBUser.swift in Sources */,
 				BB53B0282422D86800FDE6AA /* UserViewModel.swift in Sources */,

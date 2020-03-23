@@ -15,21 +15,17 @@ import AuthenticationServices
 typealias SignInWithAppleResult = (authDataResult: AuthDataResult, appleIDCredential: ASAuthorizationAppleIDCredential)
 
 struct FBAuth {
-    
-    
-    
     // MARK: - Sign In with Email functions
     
-    static func resetPassword(email:String, resetCompletion:@escaping (String,String) -> Void) {
+    static func resetPassword(email:String, resetCompletion:@escaping (Result<Bool,Error>) -> Void) {
         Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
             if let error = error {
-                resetCompletion("Reset Failed", error.localizedDescription)
+                resetCompletion(.failure(error))
             } else {
-                resetCompletion("","Success. Reset email sent successfully, Check your email")
+                resetCompletion(.success(true))
             }
         }
         )}
-    
     
     static func authenticate(withEmail email :String,
                              password:String,

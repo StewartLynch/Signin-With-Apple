@@ -1,39 +1,28 @@
 //
-//  MyTabsView.swift
-//  MyAppsTasksCD
+//  ContentView.swift
+//  Firebase Login
 //
-//  Created by Stewart Lynch on 10/28/19.
-//  Copyright © 2019 Stewart Lynch. All rights reserved.
+//  Created by Stewart Lynch on 2020-03-20.
+//  Copyright © 2020 Stewart Lynch. All rights reserved.
 //
 
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var userInfo:UserInfo
+    @EnvironmentObject var userInfo: UserInfo
     var body: some View {
-        ZStack {
+        Group {
             if userInfo.isUserAuthenticated == .undefined {
-                Text("Loading...")
+                Text("Loading....")
             } else if userInfo.isUserAuthenticated == .signedOut {
                 LoginView()
-            } else if userInfo.isUserAuthenticated == .signedIn {
-                TabView {
-                    HomeView()
-                        .tabItem {
-                            Image(systemName: "house.fill")
-                            Text("Home")
-                    }.tag(1)
-                    Text("Let's Go Driving")
-                        .tabItem {
-                            Image(systemName: "car.fill")
-                            Text("Travel")
-                    }.tag(2)
-                }
+            } else {
+                HomeView()
             }
-        }.onAppear {
+        }
+        .onAppear {
             self.userInfo.configureFirebaseStateDidChange()
         }
-        
     }
 }
 
@@ -42,4 +31,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-    

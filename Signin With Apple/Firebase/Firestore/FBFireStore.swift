@@ -7,7 +7,7 @@
 //
 import FirebaseFirestore
 
-struct FBFirestore {
+enum FBFirestore {
 
     static func retrieveFBUser(uid: String, completion: @escaping (Result<FBUser, Error>) -> ()) {
         let reference = Firestore
@@ -43,9 +43,6 @@ struct FBFirestore {
         }
     }
     
-    
-    
-    // MARK: - fileprivate
     
     fileprivate static func getDocument(for reference: DocumentReference, completion: @escaping (Result<[String : Any], Error>) -> ()) {
         reference.getDocument { (documentSnapshot, err) in

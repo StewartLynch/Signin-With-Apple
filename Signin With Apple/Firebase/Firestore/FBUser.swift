@@ -8,14 +8,36 @@
 
 import Foundation
 
-struct FBUser: Identifiable {
-    let id = UUID()
+struct FBUser {
     let uid: String
     let name: String
     let email: String
     
-    // App Specific property
-    let sharedResources: String
+    // App Specific properties can be added here
+    
+    init(uid: String, name: String, email: String) {
+        self.uid = uid
+        self.name = name
+        self.email = email
+    }
+
+}
+
+extension FBUser {
+    init?(documentData: [String : Any]) {
+        let uid = documentData[FBKeys.User.uid] as? String ?? ""
+        let name = documentData[FBKeys.User.name] as? String ?? ""
+        let email = documentData[FBKeys.User.email] as? String ?? ""
+        
+        // Make sure you also initialize any app specific properties if you have them
+
+        
+        self.init(uid: uid,
+                  name: name,
+                  email: email
+                  // Dont forget any app specific ones here too
+        )
+    }
     
     static func dataDict(uid: String, name: String, email: String) -> [String: Any] {
         var data: [String: Any]
@@ -25,8 +47,8 @@ struct FBUser: Identifiable {
             data = [
                 FBKeys.User.uid: uid,
                 FBKeys.User.name: name,
-                FBKeys.User.email: email,
-                FBKeys.User.sharedResources: "[]" // App Specific
+                FBKeys.User.email: email
+                // Again, include any app specific properties that you want stored on creation
             ]
         } else {
             // This is a subsequent entry so only merge uid and email so as not
@@ -37,23 +59,5 @@ struct FBUser: Identifiable {
             ]
         }
         return data
-    }
-}
-
-extension FBUser: DocumentSerializable {
-    
-    init?(documentData: [String : Any]) {
-        let uid = documentData[FBKeys.User.uid] as? String ?? ""
-        let name = documentData[FBKeys.User.name] as? String ?? ""
-        let email = documentData[FBKeys.User.email] as? String ?? ""
-        
-        // App specific
-        let sharedResources = documentData[FBKeys.User.sharedResources] as? String ?? ""
-        
-        self.init(uid: uid,
-                  name: name,
-                  email: email,
-                  sharedResources: sharedResources // App specific
-        )
     }
 }

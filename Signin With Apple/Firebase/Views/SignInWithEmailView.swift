@@ -13,7 +13,6 @@ struct SignInWithEmailView: View {
     @State var user: UserViewModel = UserViewModel()
     @State private var showAlert = false
     @State private var authError:EmailAuthError?
-    @State private var errString:String = ""
     @Binding var showSheet: Bool
     @Binding var action:LoginView.Action?
     var body: some View {
@@ -40,7 +39,7 @@ struct SignInWithEmailView: View {
                             self.authError = error
                             self.showAlert = true
                         case .success( _):
-                            print("Signed in")
+                            print("Successfull Login")
                         }
                     }
                 }) {
@@ -50,8 +49,8 @@ struct SignInWithEmailView: View {
                         .background(Color.green)
                         .cornerRadius(8)
                         .foregroundColor(.white)
-                }
-                
+                        .opacity(user.isLogInComplete ? 1 : 0.75)
+                }.disabled(!user.isLogInComplete)
                 Button(action: {
                     self.action = .signUp
                     self.showSheet = true
@@ -65,16 +64,14 @@ struct SignInWithEmailView: View {
                 }
             }
             .alert(isPresented: $showAlert) {
-
-                Alert(title: Text("Login Error"), message: Text(self.authError?.localizedDescription ?? "Unknown error"), dismissButton:.default(Text("OK")){
-                    switch self.authError {
-                    case .incorrectPassword:
+                Alert(title: Text("Login Error"), message: Text(self.authError?.localizedDescription ?? "Unknown error"), dismissButton: .default(Text("OK")){
+                    if self.authError == .incorrectPassword {
                         self.user.password = ""
-                    default:
-                        self.user.email = ""
+                    } else {
+                        self.user.password = ""
                         self.user.password = ""
                     }
-                })
+                    })
             }
         }
         .padding(.top, 100)
