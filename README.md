@@ -1,6 +1,7 @@
 # Signin-With-Apple
  
 Completed project for the Signin with Apple video series.
+
 **Note** If you use this project, please replace the GoogleService-Info.plist file with your own.
 
 The starter project is available in the notes for the video.
