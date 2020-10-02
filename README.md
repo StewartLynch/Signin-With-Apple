@@ -6,4 +6,4 @@ Completed project for the Signin with Apple video series.
 
 The starter project is available in the notes for the video.
 
-https://www.youtube.com/playlist?list=PLBn01m5Vbs4DKrm1gwIr_a-0B7yvlTZP6
+https://www.youtube.com/playlist?list=PLBn01m5Vbs4B79bOmI3FL_MFxjXVuDrma
